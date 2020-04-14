@@ -9,7 +9,7 @@ def merge( arrA, arrB ):
     j = 0
     k = 0
     while i < nA and j < nB:
-        if arrA[i] <= arrB[j]:
+        if arrA[i] < arrB[j]:
             merged_arr[k] = arrA[i]
             i += 1
         else:
@@ -31,24 +31,16 @@ def merge( arrA, arrB ):
 def merge_sort( arr ):
     # TO-DO
     n = len(arr)
-    if n < 2:
-        return arr
-    else:
-        mid = n // 2
-        a = [0] * mid
-        b = [0] * (n - mid) 
-        for i in range(0,mid):
-            a[i] = arr[i]
-                
-        for i in range(mid, n):
-            b[i - mid] = arr[i]
-        print(a)      
-        merge_sort(a)
-        print(a)
-        merge_sort(b)
-        merge(a,b)
-    
-    arr = merge(a,b)
+    mid = n // 2
+    sorted_arr = []
+    if n > 1:
+        a = arr[mid:]
+        b = arr[:mid]
+
+        a = merge_sort(a)
+        b = merge_sort(b)
+        arr = merge(a,b)
+    print(arr)
     return arr
 
 
